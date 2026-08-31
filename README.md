@@ -85,15 +85,23 @@ Save the benchmark output:
 
 The runtime creates `motion_heatmap.ppm` in the current directory.
 
-## Results status
+## Results
 
-Part 3 benchmark results are intentionally pending execution on the Dell Precision 5560 with its NVIDIA RTX A2000 Laptop GPU. The source was prepared on an Apple-silicon Mac, which cannot build or run CUDA. No CUDA build result or performance number is claimed from the Mac.
+Part 3 was successfully tested on a Dell Precision 5560 with an NVIDIA RTX A2000 Laptop GPU.
 
-Add `results.md` only after collecting real output on the NVIDIA machine. Do not treat inherited Part 2 measurements as Part 3 results: this version returns 432 counters and uses per-tile atomic accumulation, so it is a different workload.
+| Path | Time | FPS | Speedup vs CPU |
+|---|---:|---:|---:|
+| CPU baseline | 37.605 ms | 26.592 | — |
+| GPU pageable | 8.676 ms | 115.263 | 4.334x |
+| GPU pinned | 6.719 ms | 148.831 | 5.597x |
+
+The pinned-memory CUDA path processed a complete three-camera batch in 6.719 ms, reaching 148.831 FPS and a 5.597x speedup over the CPU baseline. All CPU/pageable, CPU/pinned, and combined CPU/GPU grids matched exactly.
+
+See [results.md](results.md) for the complete GPU timing breakdown, validation results, and hottest-tile details.
 
 ## Files
 
 - `frame_factory_motion_grid.cu` — CPU/CUDA benchmark and visualization source
 - `motion_heatmap.ppm` — generated Camera 0 heatmap
-- `motion_results.txt` — optional captured terminal output after a real run
-- `results.md` — optional summary after real measurements exist
+- `motion_results.txt` — captured terminal output from the RTX A2000 benchmark
+- `results.md` — measured timings, validation, and spatial result summary
