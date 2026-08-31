@@ -1,12 +1,5 @@
-frame_factory
+frame_factory_motion_grid
 *.o
 *.out
 build/
 .DS_Store
-# Compiled chapter binaries
-chapter-02/chapter02
-chapter-03/chapter03
-chapter-04/chapter04
-chapter-05/chapter05
-chapter-06/chapter06
-frame_factory_motion
